@@ -112,10 +112,12 @@ var akPicToLaser=function(zielID){
 		//objektdata:false,
 		graufunc:"GF",
 		timer:undefined,
-		stopconvert:false
+		stopconvert:false,
+		
+		dateiname:""
 		
 	}
- 
+
 
  
  
@@ -696,7 +698,7 @@ var akPicToLaser=function(zielID){
 							if(globaldata.modus=="app"){
 								if(typeof(AppBridge)!="undefined"){
 									var AB=new AppBridge();
-									AB.DataIO("savefile", outPutDoc.innerHTML);
+										AB.DataIO("savefile",{"filename":objektdata.dateiname, "data":outPutDoc.innerHTML});
 								}
 							}
 					}	
@@ -727,7 +729,13 @@ var akPicToLaser=function(zielID){
 					|| filename.indexOf(".bmp")>-1 
 					|| filename.indexOf(".gif")>-1 
 					){
- 
+					objektdata.dateiname=filename;console.log(objektdata.dateiname);
+					objektdata.dateiname=objektdata.dateiname.split(".jpg").join("");
+					objektdata.dateiname=objektdata.dateiname.split(".jpeg").join("");
+					objektdata.dateiname=objektdata.dateiname.split(".png").join("");
+					objektdata.dateiname=objektdata.dateiname.split(".bmp").join("");
+					objektdata.dateiname=objektdata.dateiname.split(".gif").join("");
+					objektdata.dateiname+=".gcode";
 					loadImage(ifile);
 					subClass(makeButt,"unsichtbar");
 				}; 

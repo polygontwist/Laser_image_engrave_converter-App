@@ -2,7 +2,7 @@
   "name": "ImageToGcode",
   "productName": "ImageToGcode",
   "description": "Image To Gcode Konverter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Andreas Kosmehl (ak@a-d-k.de)",
   "main": "main.js",
   "scripts": {
@@ -13,19 +13,21 @@
   "keywords": [
     "Electron",
     "gcode",
-    "image",	"laser"
+    "image",
+    "laser"
   ],
   "homepage": "http://www.a-d-k.de",
   "devDependencies": {
+    "electron-builder": "^11.2.5",
     "electron-prebuilt": "^1.2.0"
   },
   "build": {
     "appId": "de.adk.ITG",
     "mac": {
-		"category": "public.app-category.utilities"
+      "category": "public.app-category.utilities"
     },
     "win": {
-		"icon": "build/itg.ico"
+      "icon": "build/itg.ico"
     }
   }
 }

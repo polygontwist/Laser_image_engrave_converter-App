@@ -148,18 +148,6 @@ var AppBridge=function(){
 		
 	}
 	
-	var getSentvar=function(s){
-		var i,v,re={},
-			variabeln=(s+'').split('&');
-		//id=fairydustrocket&data=%7B
-		for(i=0;i<variabeln.length;i++){
-			v=variabeln[i].split('=');
-			re[v[0]]=v[1];
-		}
-		
-		return re;
-	}
-	
 	var clearfilename=function(sname){
 		//sname = decodeURI(sname);
 		sname = sname.split(" ").join("");//str_replace(' ', '', $string);
@@ -193,9 +181,7 @@ var AppBridge=function(){
 	//system (loadDataAPP)<->elektron 
 	this.DataIO=function(url,daten){
 		//console.log("DataIO",globaldata.user,url,getorpost,daten,fs);
-		var pd=getSentvar(daten);
-		var data={};
-
+		
 		//if(basepathDATA=="")return;
 		
 		zurl=url;
@@ -203,7 +189,7 @@ var AppBridge=function(){
 			//console.log(daten)
 			dialog.showSaveDialog(
 				{
-					defaultPath :basepathDATA,
+					defaultPath :basepathDATA+"/"+daten.filename,
 					properties: ['openDirectory'],
 					filters: [
 						{name: 'gcode', extensions: ['gcode']},
@@ -218,7 +204,7 @@ var AppBridge=function(){
 					   else{
 						   if(fileName.indexOf('.gcode')<0)fileName+='.gcode';
 						   console.log("fileName",fileName);
-						   fs.writeFileSync(fileName, daten,'utf8');
+						   fs.writeFileSync(fileName, daten.data,'utf8');
 						   
 						   alert("Datei "+fileName+" gespeichert.");
 					   }
