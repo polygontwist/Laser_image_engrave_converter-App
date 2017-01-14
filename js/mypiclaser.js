@@ -13,7 +13,7 @@
 	300dpi testen (OK @500mm/s)
 	300dpi testen (OK @800mm/s)
 	
-	TODO:Worker 
+	
 */
 
 
@@ -113,7 +113,12 @@ var akPicToLaser=function(zielID){
 		graufunc:"GF",
 		timer:undefined,
 		stopconvert:false
+		
 	}
+ 
+
+ 
+ 
  
 	var createOInputNr=function(ziel,id,inivalue,min,max){
 		var htmlNode;
@@ -357,7 +362,8 @@ var akPicToLaser=function(zielID){
 			objektdata.stopconvert=true;
 			addClass(pauseButt,"unsichtbar"); 
 			subClass(makeButt,"unsichtbar");
-			return false;}
+			return false;
+			}
 		
 		
 		p=cE(ziel,"p","p_outPutDoc","unsichtbar");
@@ -664,8 +670,14 @@ var akPicToLaser=function(zielID){
 		zeile++;
 		if(zeile<c.height){
 				if(objektdata.stopconvert){//Stopp gedrückt?
-					outPutDoc.style.display="inline-block";	
-					subClass(gE("p_outPutDoc"),"unsichtbar");
+				
+					if(typeof(globaldata)!="undefined"){
+								
+					}
+					else{
+						outPutDoc.style.display="inline-block";	
+						subClass(gE("p_outPutDoc"),"unsichtbar");
+					}
 				}
 				else
 					window.setTimeout(konvertiereF,10);
@@ -677,9 +689,23 @@ var akPicToLaser=function(zielID){
 				outPutDoc.innerHTML+="M9 ; Coolant Off\n";//
 				outPutDoc.innerHTML+=" ; Dauer min. "+Math.round(objektdata.dauer*objektdata.timekorr+1)+"min \n";//
 				outPutDoc.innerHTML+=" ; end \n";//
-				outPutDoc.style.display="inline-block";	
-				subClass(gE("p_outPutDoc"),"unsichtbar");
-				
+
+				 
+				if(typeof(globaldata)!="undefined"){
+						if(globaldata.modus!=undefined){
+							if(globaldata.modus=="app"){
+								if(typeof(AppBridge)!="undefined"){
+									var AB=new AppBridge();
+									AB.DataIO("savefile", outPutDoc.innerHTML);
+								}
+							}
+					}	
+				}
+				else{
+					//wwww-Version
+					outPutDoc.style.display="inline-block";
+					subClass(gE("p_outPutDoc"),"unsichtbar");
+				}
 				addClass(pauseButt,"unsichtbar");
 				subClass(makeButt,"unsichtbar");						
 			}
