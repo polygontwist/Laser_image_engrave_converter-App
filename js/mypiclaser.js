@@ -18,7 +18,7 @@
 
 
 var akPicToLaser=function(zielID){
-	var version="1.6 2016-12-17";
+	var version="1.7 2017-05-03";
 	
 	var ziel;	
  
@@ -653,7 +653,7 @@ var akPicToLaser=function(zielID){
 		szeile+="M5\n"; //Spindle Off
 		
 		//wenn Zeile =0 dann gleich zur nächsten
- 		if(valuecount>1 && minblack<255){//keine Leerzeilen erzeugen
+ 		if(valuecount>0 && minblack<255){//keine Leerzeilen erzeugen
 			outPutDoc.innerHTML+=szeile;
 			
 			setPixel(c,0,zeile, 255,0,0,255);
